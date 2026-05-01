@@ -14,4 +14,4 @@
 *.vsix
 
 .DS_Store
-*.out
+verilog/*.out
