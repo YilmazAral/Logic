@@ -1,3 +1,13 @@
+module tb_mux;
+    wire [3:0] w0;
+    wire [1:0] w1;
+    wire w2;
+
+    mux4x1 m (w0, w1, w2);
+    test_mux t (w0, w1, w2);
+
+endmodule
+
 module mux4x1 (
     input [3:0] I,
     input [1:0] S,
@@ -11,12 +21,10 @@ assign O = (~S[1] & ~S[0] & I[0])
 
 endmodule
 
-module test_mux;
-    reg [3:0] I;
-    reg [1:0] S;
-    wire O;
-
-mux4x1 mux0(I, S, O);
+module test_mux(
+    output reg [3:0] I,
+    output reg [1:0] S,
+    input O);
 
 initial begin
     $monitor($time,,,"I = %b%b%b%b S = %b%b O = %b",
