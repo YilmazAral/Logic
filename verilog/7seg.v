@@ -12,17 +12,18 @@ module aSeg_test(
     output reg [3:0] I
 );
 
-    initial begin
-        $monitor("I = %b%b%b%b A = %b", I[3], I[2], I[1], I[0], O);
-    
-    always @(*) begin
-        integer i;
+    integer i;
 
+    initial begin
+        $monitor("I = %d A = %b", I, O);
+
+        I = 0;
+    
         for (i = 0; i < 16; i = i + 1) begin
             #1 I = i;
         end
-    
-    end
+
+        $finish;
     end
 
 endmodule
@@ -32,7 +33,7 @@ module aSeg(
     input [3:0] I
 );
 
-    assign O = I[3] + I[1] + (I[2] ~^ I[0]);
+    assign O = I[3] | I[1] | (I[2] ~^ I[0]);
 
 endmodule
 
@@ -41,7 +42,7 @@ module bSeg(
     input [3:0] I
 );
 
-    assign O = I[3] + I[2] + (I[1] ~^ I[0]);
+    assign O = I[3] | I[2] | (I[1] ~^ I[0]);
 
 endmodule
 /*
